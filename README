@@ -1,0 +1,15 @@
+There are two folders here, one is the client and the other is the server. The server is supposed to be running on DPU. The client should be started at CPU hosts.
+
+We privide three example code folders for clients. Each one can be running separately.Before starting the client, you should use the command below to run the server processes on DPU:
+
+###############mpirun -n 4 --hostfile host_file -x LD_LIBRARY_PATH -x PATH server 
+
+We already provide the host_file & server in folder dpu_server. You can change the hostfile and run a different number of processes by using a command line similar to the above one.(make sure the number of the client processes and the number of server processes on the same machine are equal!!!)
+
+Use the following command to start the client.
+
+###############mpirun -n 4 --hostfile host_file -x LD_LIBRARY_PATH -x PATH client
+
+You can view the client_main_rc.c and get to know how to use the APIs we provided. Noticed that, the server will be running all the time. So, if you want to test another example or modify the code to do something else, you need to restart the server process.
+
+We privide a more detailed report, about the architecture of our design and the merits (we solve the big message problem and memory limitation on DPU, more importantly,we privide another framework for connection). In the report, we also show an experiment of testing the finish time performance between our mpi_alltoall and the origin one. Actually, we use the client_test_Asynchronous example to do the test.
